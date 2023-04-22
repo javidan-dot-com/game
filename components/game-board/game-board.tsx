@@ -11,6 +11,12 @@ type GameBoardProps = {
     players: PlayerInfo[]
 }
 
+type Game = {
+    result: string;
+    winner: string;
+    round: number;
+}
+
 const GameBoard = ({ players }: GameBoardProps) => {
     const [board, setBoard] = useState<string[][]>([
         ['', '', ''],
@@ -19,6 +25,11 @@ const GameBoard = ({ players }: GameBoardProps) => {
     ]);
     const [gameState, setGameState] = useState(EGameStates.PLAYING);
     const [currentPlayer, setCurrentPlayer] = useState('X');
+    const [currentGame, setCurrentGame] = useState<Game>({
+        result: '',
+        winner: '',
+        round: 1,
+    });
 
     const handleCellClick = (rowIndex: number, colIndex: number) => {
         if (board[rowIndex][colIndex] !== '') {
@@ -34,11 +45,21 @@ const GameBoard = ({ players }: GameBoardProps) => {
 
         const winner = calculateWinner(newBoard);
         if (winner) {
+            setCurrentGame({
+                ...currentGame,
+                result: winner === 'X' ? `${players[0].playerName} wins` : `${players[1].playerName} wins`,
+                winner: winner === 'X' ? players[0].player : players[1].player,
+            });
             setGameState(EGameStates.GAME_OVER);
             return;
         }
 
         if (checkDraw(newBoard)) {
+            setCurrentGame({
+                ...currentGame,
+                result: 'Draw',
+                winner: '',
+            });
             setGameState(EGameStates.GAME_OVER);
             return;
         }
