@@ -90,22 +90,52 @@ const GameBoard = ({ players }: GameBoardProps) => {
         return board.every(row => row.every(cell => cell !== ''));
     }
 
+    const handleRestartGame = () => {
+        setBoard([
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
+        setCurrentPlayer('X');
+        setGameState(EGameStates.PLAYING);
+        setCurrentGame({
+            result: '',
+            winner: '',
+            round: currentGame.round + 1,
+        });
+    }
+
     return (
-        <div className={styles.board}>
-            {board.map((row, rowIndex) => (
-                <div key={rowIndex} className={styles.row}>
-                    {row.map((cell, columnIndex) => (
-                        <div
-                            key={columnIndex}
-                            className={styles.cell}
-                            onClick={() => handleCellClick(rowIndex, columnIndex)}
-                        >
-                            {cell}
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </div>
+        <>
+            <div className={styles.board}>
+                {board.map((row, rowIndex) => (
+                    <div key={rowIndex} className={styles.row}>
+                        {row.map((cell, columnIndex) => (
+                            <div
+                                key={columnIndex}
+                                className={styles.cell}
+                                onClick={() => handleCellClick(rowIndex, columnIndex)}
+                            >
+                                {cell}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+
+            <div>
+                <h3>Round: {currentGame.round}</h3>
+                <h3>Winner: {currentGame.result}</h3>
+
+                {gameState === EGameStates.GAME_OVER && (
+                    <button
+                        onClick={handleRestartGame}
+                    >
+                        Restart Game
+                    </button>
+                )}
+            </div>
+        </>
     )
 }
 
