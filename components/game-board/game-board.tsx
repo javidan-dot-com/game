@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './game-board.module.scss';
-import { PlayerInfo, Players } from '@/pages/game';
+import { PlayerInfo } from '@/pages/game';
 
 export enum EGameStates {
     PLAYING = 'PLAYING',
@@ -20,8 +20,53 @@ const GameBoard = ({ players }: GameBoardProps) => {
     const [gameState, setGameState] = useState(EGameStates.PLAYING);
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
-    const handleCellClick = () => {
-        console.log('Cell clicked');
+    const handleCellClick = (rowIndex: number, colIndex: number) => {
+        if (board[rowIndex][colIndex] !== '') {
+            return;
+        }
+
+        const newBoard = [...board];
+        newBoard[rowIndex][colIndex] = currentPlayer;
+        setBoard(newBoard);
+
+        const nextPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        setCurrentPlayer(nextPlayer);
+
+        const winner = calculateWinner(newBoard);
+        if (winner) {
+            setGameState(EGameStates.GAME_OVER);
+            return;
+        }
+
+        if (checkDraw(newBoard)) {
+            setGameState(EGameStates.GAME_OVER);
+            return;
+        }
+    }
+
+    const calculateWinner = (board: string[][]) => {
+        const possibleWins = [
+            [board[0][0], board[0][1], board[0][2]],
+            [board[1][0], board[1][1], board[1][2]],
+            [board[2][0], board[2][1], board[2][2]],
+            [board[0][0], board[1][0], board[2][0]],
+            [board[0][1], board[1][1], board[2][1]],
+            [board[0][2], board[1][2], board[2][2]],
+            [board[0][0], board[1][1], board[2][2]],
+            [board[2][0], board[1][1], board[0][2]],
+        ];
+
+        for (const cells of possibleWins) {
+            if (cells.every(cell => cell !== '' && cell === cells[0])) {
+                return cells[0];
+            }
+        }
+
+        return null;
+    };
+
+    const checkDraw = (board: string[][]): boolean => {
+        return board.every(row => row.every(cell => cell !== ''));
     }
 
     return (
@@ -32,7 +77,7 @@ const GameBoard = ({ players }: GameBoardProps) => {
                         <div
                             key={columnIndex}
                             className={styles.cell}
-                            onClick={() => handleCellClick()}
+                            onClick={() => handleCellClick(rowIndex, columnIndex)}
                         >
                             {cell}
                         </div>
