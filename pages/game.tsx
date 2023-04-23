@@ -4,6 +4,7 @@ import GameBoard from "@/components/game-board/game-board";
 import { useContext, useEffect } from "react";
 import ScoreBoard from "@/components/score-board/score-board";
 import { CommonStoreContext } from "@/stores/common.store";
+import PlayerInfo from "@/components/player-info/player-info";
 
 export type Players = {
     firstPlayer: string,
@@ -36,16 +37,11 @@ const Game = () => {
 
     return (
         <main className={styles.main}>
-            <div className={styles.players_info}>
-                <h3>Player 1: {players[0].playerName}</h3>
-                <h3>Player 2: {players[1].playerName}</h3>
-            </div>
+            <PlayerInfo players={players} />
 
-            <div className={styles.game_board}>
-                <GameBoard />
-            </div>
+            <GameBoard />
 
-            <ScoreBoard players={players} />
+            <ScoreBoard />
         </main>
     )
 }

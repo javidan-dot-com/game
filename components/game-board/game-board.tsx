@@ -163,7 +163,7 @@ const GameBoard = () => {
     }
 
     return (
-        <>
+        <div className={styles.game_board}>
             <div className={styles.board}>
                 {board.map((row, rowIndex) => (
                     <div key={rowIndex} className={styles.row}>
@@ -202,7 +202,7 @@ const GameBoard = () => {
                     </button>
                 )}
             </div>
-        </>
+        </div>
     )
 }
 

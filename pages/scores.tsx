@@ -14,7 +14,6 @@ const Scores = () => {
                 <thead>
                     <tr>
                         <th>Round</th>
-                        <th>Winner</th>
                         <th>Result</th>
                     </tr>
                 </thead>
@@ -22,7 +21,6 @@ const Scores = () => {
                     {gameHistory.map((game, index) => (
                         <tr key={index}>
                             <td>{game.round}</td>
-                            <td>{game.winner}</td>
                             <td>{game.result}</td>
                         </tr>
                     ))}
