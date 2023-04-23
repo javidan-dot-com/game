@@ -160,7 +160,7 @@ const GameBoard = () => {
                             <div
                                 key={columnIndex}
                                 className={styles.cell}
-                                onClick={() => handleCellClick(rowIndex, columnIndex)}
+                                onClick={() => gameState === EGameStates.PLAYING && handleCellClick(rowIndex, columnIndex)}
                             >
                                 {cell}
                             </div>

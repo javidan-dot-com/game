@@ -1,10 +1,12 @@
+@import '../../styles/variables.scss';
+
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 600px;
-    width: 300px;
+    width: 100%;
     padding: 0 1rem;
     row-gap: 20px;
 
@@ -13,15 +15,35 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        width: 300px;
+        color: $text-color-light;
+        font-family: $main-font-family;
+        font-size: 1rem;
+
+        input {
+            font-size: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #d1d5da;
+            border-radius: 0.25rem; 
+            box-shadow: 0 0 0 1px #d1d5da;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+        }
     }
 
     button {
-        background-color: rgb(82, 16, 186);
+        margin-top: 20px;
+        background-color: $secondary-color;
         border: none;
         border-radius: 5px;
         padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        font-size: 1rem;
         cursor: pointer;
+        color: $text-color-light;
     }
 }
