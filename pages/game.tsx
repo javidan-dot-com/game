@@ -45,13 +45,14 @@ const Game = () => {
     return (
         <main className={styles.main}>
             <div className={styles.players_info}>
-                <h3>Player 1: {firstPlayer}</h3>
-                <h3>Player 2: {secondPlayer}</h3>
+                <h3>Player 1: {players[0].playerName}</h3>
+                <h3>Player 2: {players[1].playerName}</h3>
             </div>
 
             <div className={styles.game_board}>
                 <GameBoard
                     players={players}
+                    setPlayers={setPlayers}
                 />
             </div>
 

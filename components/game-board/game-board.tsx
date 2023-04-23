@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './game-board.module.scss';
 import { PlayerInfo } from '@/pages/game';
+import { CommonStoreContext } from '@/stores/common.store';
 
 export enum EGameStates {
     PLAYING = 'PLAYING',
@@ -9,15 +10,16 @@ export enum EGameStates {
 
 type GameBoardProps = {
     players: PlayerInfo[]
+    setPlayers: (players: PlayerInfo[]) => void;
 }
 
-type Game = {
+export type Game = {
     result: string;
     winner: string;
     round: number;
 }
 
-const GameBoard = ({ players }: GameBoardProps) => {
+const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
     const [board, setBoard] = useState<string[][]>([
         ['', '', ''],
         ['', '', ''],
@@ -30,6 +32,18 @@ const GameBoard = ({ players }: GameBoardProps) => {
         winner: '',
         round: 1,
     });
+    const { gameHistory, setGameHistory } = useContext(CommonStoreContext);
+
+    useEffect(() => {
+        if (gameState === EGameStates.GAME_OVER) {
+            const history = gameHistory;
+
+            setGameHistory([
+                ...history,
+                currentGame,
+            ]);
+        }
+    }, [gameState]);
 
     const handleCellClick = (rowIndex: number, colIndex: number) => {
         if (board[rowIndex][colIndex] !== '') {
@@ -103,6 +117,25 @@ const GameBoard = ({ players }: GameBoardProps) => {
             winner: '',
             round: currentGame.round + 1,
         });
+
+        const history = gameHistory;
+
+        if (history.length > 0) {
+            const previousGame = history[history.length - 1];
+            if (previousGame.winner === players[1].player) {
+                console.log(history, previousGame, players)
+                setPlayers([
+                    {
+                        ...players[0],
+                        playerName: players[1].playerName,
+                    },
+                    {
+                        ...players[1],
+                        playerName: players[0].playerName,
+                    }
+                ]);
+            }
+        }
     }
 
     return (
