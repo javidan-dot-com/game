@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import styles from './game-board.module.scss';
 import { CommonStoreContext } from '@/stores/common.store';
 
@@ -165,23 +165,15 @@ const GameBoard = () => {
             </div>
 
             <div>
-                <h4>Round: {currentGame.round}</h4>
-                {
-                    gameState === EGameStates.PLAYING && (
-                        <h4>Current Player: {currentPlayer === 'X' ? players[0].playerName : players[1].playerName}</h4>
-                    )
-                }
                 {
                     gameState === EGameStates.GAME_OVER && (
-                        <h3>{currentGame.result}</h3>
+                        <button
+                            onClick={handleRestartGame}
+                        >
+                            Restart Game
+                        </button>
                     )
                 }
-
-                <button
-                    onClick={handleRestartGame}
-                >
-                    Restart Game
-                </button>
             </div>
         </div>
     )

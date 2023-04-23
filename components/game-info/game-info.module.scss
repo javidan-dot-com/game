@@ -1,23 +1,31 @@
 @import "../../styles/variables.scss";
 
-.player_info {
+.game_info {
     display: flex;
     flex-direction: row;
     gap: 20px;
     justify-content: space-between;
 
-    &__details {
+    &__item {
         display: flex;
         flex-direction: column;
         gap: 10px;
 
-        h3 {
-        font-size: 1.2rem;
-        font-weight: 400;
+        &__text {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 125px;
 
-            span {
-                font-weight: 600;
-                margin: 0 5px;
+            > :first-child {
+            font-size: 1.2rem;
+            font-weight: 400;
+            }
+
+            > :last-child {
+            font-size: 1.2rem;
+            font-weight: 700;
             }
         }
     }

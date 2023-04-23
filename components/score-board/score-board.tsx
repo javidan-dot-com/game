@@ -2,7 +2,7 @@ import styles from './score-board.module.scss';
 import { useRouter } from 'next/router';
 import { CommonStoreContext } from '@/stores/common.store';
 import { useContext } from 'react';
-import { TPlayerInfo } from '../player-info/player-info';
+import { TPlayerInfo } from '../game-info/game-info';
 
 const ScoreBoard = () => {
     const route = useRouter();

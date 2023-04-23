@@ -1,7 +1,12 @@
 import { EGameStates, Game } from "@/components/game-board/game-board";
-import { TPlayerInfo } from "@/components/player-info/player-info";
 import { useRouter } from "next/router";
 import { ReactNode, createContext, useState } from "react";
+
+export type TPlayerInfo = {
+    playerName: string,
+    playerId: number,
+    score: number,
+}
 
 interface ICommonStoreContext {
     gameHistory: Game[];

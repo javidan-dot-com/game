@@ -4,7 +4,10 @@ import StartingForm from '@/components/starting-form/starting-form'
 import Image from 'next/image'
 
 export default function Home() {
-  const greeting = 'Welcome to '
+  const greetingText = {
+    beginning: 'Welcome to',
+    end: 'game!',
+  }
 
   return (
     <>
@@ -17,14 +20,16 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.intro}>
-            <h1 className={styles.intro__title}>{greeting}</h1>
+            <h1 className={styles.intro__title}>{greetingText.beginning}</h1>
 
             <Image
-              src="/tic-tac-toe-logo.png"
+              src="/tic-tac-toe_logo.png"
               alt="Tic-Tac-Toe logo"
               width={300}
               height={300}
             />
+
+            <h1 className={styles.intro__title}>{greetingText.end}</h1>
           </div>
 
           <StartingForm />

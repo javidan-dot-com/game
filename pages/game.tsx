@@ -4,7 +4,7 @@ import GameBoard from "@/components/game-board/game-board";
 import { useContext, useEffect } from "react";
 import ScoreBoard from "@/components/score-board/score-board";
 import { CommonStoreContext } from "@/stores/common.store";
-import PlayerInfo from "@/components/player-info/player-info";
+import PlayerInfo from "@/components/game-info/game-info";
 
 export type Players = {
     firstPlayer: string,
@@ -31,7 +31,7 @@ const Game = () => {
 
     return (
         <main className={styles.main}>
-            <PlayerInfo players={players} />
+            <PlayerInfo />
 
             <GameBoard />
 
