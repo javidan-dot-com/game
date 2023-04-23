@@ -77,7 +77,7 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
         if (winner) {
             setCurrentGame({
                 ...currentGame,
-                result: winner === 'X' ? `${players[0].playerName} wins` : `${players[1].playerName} wins`,
+                result: winner === 'X' ? `${players[0].playerName} won` : `${players[1].playerName} won`,
                 winner: winner === 'X' ? players[0].player : players[1].player,
             });
             setGameState(EGameStates.GAME_OVER);
