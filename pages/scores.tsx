@@ -6,3 +6,5 @@ const Scores = () => {
         </div>
     );
 };
+
+export default Scores;

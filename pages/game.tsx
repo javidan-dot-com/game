@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styles from '../styles/Game.module.scss';
 import GameBoard from "@/components/game-board/game-board";
 import { useEffect, useState } from "react";
+import ScoreBoard from "@/components/score-board/score-board";
 
 export type Players = {
     firstPlayer: string,
@@ -56,13 +57,7 @@ const Game = () => {
                 />
             </div>
 
-            <div className={styles.score_board}>
-                <h3>Score Board</h3>
-                <div className={styles.score}>
-                    <h4>{players[0].playerName}: {players[0].score}</h4>
-                    <h4>{players[1].playerName}: {players[1].score}</h4>
-                </div>
-            </div>
+            <ScoreBoard players={players} />
         </main>
     )
 }

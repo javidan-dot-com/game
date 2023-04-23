@@ -1,0 +1,32 @@
+.score_board {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 10px;
+
+    * {
+        margin: 0 5px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 100px;
+        row-gap: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: bold;
+
+        > li {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+            list-style: none;
+        }
+    }
+}
