@@ -8,18 +8,13 @@ export enum EGameStates {
     GAME_OVER = 'GAME_OVER'
 }
 
-type GameBoardProps = {
-    players: PlayerInfo[]
-    setPlayers: (players: PlayerInfo[]) => void;
-}
-
 export type Game = {
     result: string;
     winner: string;
     round: number;
 }
 
-const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
+const GameBoard = () => {
     const [board, setBoard] = useState<string[][]>([
         ['', '', ''],
         ['', '', ''],
@@ -32,7 +27,7 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
         winner: '',
         round: 1,
     });
-    const { gameHistory, setGameHistory } = useContext(CommonStoreContext);
+    const { gameHistory, setGameHistory, players, setPlayers } = useContext(CommonStoreContext);
 
     useEffect(() => {
         if (gameState === EGameStates.GAME_OVER) {
@@ -60,6 +55,17 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
             }
         }
     }, [gameState]);
+
+    useEffect(() => {
+        const ifHistoryExists = gameHistory.length > 0;
+        if (ifHistoryExists && gameState === EGameStates.PLAYING) {
+            const lastGame = gameHistory[gameHistory.length - 1];
+            setCurrentGame({
+                ...lastGame,
+                round: lastGame.round + 1,
+            });
+        }
+    }, [gameHistory]);
 
     const handleCellClick = (rowIndex: number, colIndex: number) => {
         if (board[rowIndex][colIndex] !== '') {

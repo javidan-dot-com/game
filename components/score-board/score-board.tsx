@@ -1,13 +1,12 @@
 import { PlayerInfo } from '@/pages/game';
 import styles from './score-board.module.scss';
 import { useRouter } from 'next/router';
+import { CommonStoreContext } from '@/stores/common.store';
+import { useContext } from 'react';
 
-interface ScoreBoardProps {
-    players: PlayerInfo[];
-}
-
-const ScoreBoard = ({ players }: ScoreBoardProps) => {
+const ScoreBoard = () => {
     const route = useRouter();
+    const { players } = useContext(CommonStoreContext);
 
     const sortPlayers = (players: PlayerInfo[]) => {
         return players.sort((a, b) => b.score - a.score);

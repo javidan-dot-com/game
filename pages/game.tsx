@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import styles from '../styles/Game.module.scss';
 import GameBoard from "@/components/game-board/game-board";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import ScoreBoard from "@/components/score-board/score-board";
+import { CommonStoreContext } from "@/stores/common.store";
 
 export type Players = {
     firstPlayer: string,
@@ -18,17 +19,7 @@ export type PlayerInfo = {
 const Game = () => {
     const route = useRouter();
     const { firstPlayer, secondPlayer } = route.query as Players;
-    const [players, setPlayers] = useState<PlayerInfo[]>([
-        {
-            player: "Player 1",
-            playerName: '',
-            score: 0,
-        },
-        {
-            player: "Player 2",
-            playerName: '',
-            score: 0,
-        }]);
+    const { players, setPlayers } = useContext(CommonStoreContext);
 
     useEffect(() => {
         setPlayers([
@@ -51,10 +42,7 @@ const Game = () => {
             </div>
 
             <div className={styles.game_board}>
-                <GameBoard
-                    players={players}
-                    setPlayers={setPlayers}
-                />
+                <GameBoard />
             </div>
 
             <ScoreBoard players={players} />
