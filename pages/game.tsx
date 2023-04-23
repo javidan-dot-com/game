@@ -56,7 +56,13 @@ const Game = () => {
                 />
             </div>
 
-            <div className={styles.score_board}></div>
+            <div className={styles.score_board}>
+                <h3>Score Board</h3>
+                <div className={styles.score}>
+                    <h4>{players[0].playerName}: {players[0].score}</h4>
+                    <h4>{players[1].playerName}: {players[1].score}</h4>
+                </div>
+            </div>
         </main>
     )
 }

@@ -175,10 +175,18 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
             </div>
 
             <div>
-                <h3>Round: {currentGame.round}</h3>
-                <h3>Winner: {currentGame.result}</h3>
-                <h3>{`${players[0].playerName}'s score:`} {players[0].score}</h3>
-                <h3>{`${players[1].playerName}'s score:`} {players[1].score}</h3>
+                <h4>Round: {currentGame.round}</h4>
+                {
+                    gameState === EGameStates.PLAYING && (
+                        <h4>Current Player: {currentPlayer === 'X' ? players[0].playerName : players[1].playerName}</h4>
+                    )
+                }
+
+                {
+                    gameState === EGameStates.GAME_OVER && (
+                        <h3>{currentGame.result}</h3>
+                    )
+                }
 
                 {gameState === EGameStates.GAME_OVER && (
                     <button
