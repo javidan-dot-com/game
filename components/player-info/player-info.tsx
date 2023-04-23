@@ -2,9 +2,9 @@ import { CommonStoreContext } from "@/stores/common.store";
 import { useContext } from "react";
 
 export type TPlayerInfo = {
-    player: string,
     playerName: string,
-    score: number
+    playerId: number,
+    score: number,
 }
 
 interface PlayerInfoProps {

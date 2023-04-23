@@ -9,7 +9,8 @@ const ScoreBoard = () => {
     const { players } = useContext(CommonStoreContext);
 
     const sortPlayers = (players: TPlayerInfo[]) => {
-        return players.sort((a, b) => b.score - a.score);
+        const clonedPlayers = players.slice();
+        return clonedPlayers.sort((a, b) => b.score - a.score);
     }
     const sortedList = sortPlayers(players);
 

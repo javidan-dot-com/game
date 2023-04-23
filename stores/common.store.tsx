@@ -33,13 +33,13 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
     ]);
     const [players, setPlayers] = useState<TPlayerInfo[]>([
         {
-            player: "Player 1",
             playerName: '',
+            playerId: 1,
             score: 0,
         },
         {
-            player: "Player 2",
             playerName: '',
+            playerId: 2,
             score: 0,
         }]);
     const startFresh = () => {
@@ -47,13 +47,13 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
         setGameHistory([]);
         setPlayers([
             {
-                player: "Player 1",
                 playerName: '',
+                playerId: 1,
                 score: 0,
             },
             {
-                player: "Player 2",
                 playerName: '',
+                playerId: 2,
                 score: 0,
             }]
         );

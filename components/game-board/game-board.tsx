@@ -9,7 +9,7 @@ export enum EGameStates {
 
 export type Game = {
     result: string;
-    winner: string;
+    winnerId: number;
     round: number;
 }
 
@@ -18,7 +18,7 @@ const GameBoard = () => {
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [currentGame, setCurrentGame] = useState<Game>({
         result: '',
-        winner: '',
+        winnerId: 0,
         round: 1,
     });
     const { gameHistory, setGameHistory, players, setPlayers, board, setBoard } = useContext(CommonStoreContext);
@@ -32,16 +32,15 @@ const GameBoard = () => {
                 currentGame,
             ]);
 
-            const winner = currentGame.winner;
+            const winner = players.find(player => player.playerId === currentGame.winnerId);
             if (winner) {
                 const newPlayers = players.map(player => {
-                    if (player.player === winner) {
+                    if (player.playerId === winner.playerId) {
                         return {
                             ...player,
                             score: player.score + 1,
                         }
                     }
-
                     return player;
                 });
 
@@ -78,7 +77,7 @@ const GameBoard = () => {
             setCurrentGame({
                 ...currentGame,
                 result: winner === 'X' ? `${players[0].playerName} won` : `${players[1].playerName} won`,
-                winner: winner === 'X' ? players[0].player : players[1].player,
+                winnerId: winner === 'X' ? players[0].playerId : players[1].playerId,
             });
             setGameState(EGameStates.GAME_OVER);
             return;
@@ -88,7 +87,7 @@ const GameBoard = () => {
             setCurrentGame({
                 ...currentGame,
                 result: 'Draw',
-                winner: '',
+                winnerId: 0,
             });
             setGameState(EGameStates.GAME_OVER);
             return;
@@ -130,7 +129,7 @@ const GameBoard = () => {
         setGameState(EGameStates.PLAYING);
         setCurrentGame({
             result: '',
-            winner: '',
+            winnerId: 0,
             round: currentGame.round + 1,
         });
 
@@ -138,18 +137,14 @@ const GameBoard = () => {
 
         if (history.length > 0) {
             const previousGame = history[history.length - 1];
-            if (previousGame.winner === players[1].player) {
-                console.log(history, previousGame, players)
+            console.log(previousGame, players[0].score, players[1].score);
+            if (previousGame.winnerId === players[1].playerId) {
                 setPlayers([
                     {
-                        ...players[0],
-                        playerName: players[1].playerName,
-                        score: players[1].score,
+                        ...players[1],
                     },
                     {
-                        ...players[1],
-                        playerName: players[0].playerName,
-                        score: players[0].score,
+                        ...players[0],
                     }
                 ]);
             }
