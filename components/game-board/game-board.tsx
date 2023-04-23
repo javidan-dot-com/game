@@ -83,7 +83,7 @@ const GameBoard = () => {
         if (winner) {
             setCurrentGame({
                 ...currentGame,
-                result: winner === 'X' ? `${players[0].playerName} won` : `${players[1].playerName} won`,
+                result: winner === 'X' ? players[0].playerName : players[1].playerName,
                 winnerId: winner === 'X' ? players[0].playerId : players[1].playerId,
             });
             setGameState(EGameStates.GAME_OVER);

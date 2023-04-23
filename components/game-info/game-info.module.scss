@@ -16,7 +16,8 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            min-width: 125px;
+            min-width: 120px;
+            gap: 10px;
 
             > :first-child {
             font-size: 1.2rem;

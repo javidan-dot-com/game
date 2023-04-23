@@ -34,7 +34,7 @@ const GameInfo = () => {
                             </>
                         ) : (
                             <>
-                                <h3>Winner: </h3> <h3>{currentPlayer === 'X' ? players[0].playerName : players[1].playerName}</h3>
+                                <h3>Winner: </h3> <h3>{currentGame.result}</h3>
                             </>
                         )
                     }
