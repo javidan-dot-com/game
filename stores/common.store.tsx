@@ -1,4 +1,4 @@
-import { Game } from "@/components/game-board/game-board";
+import { EGameStates, Game } from "@/components/game-board/game-board";
 import { TPlayerInfo } from "@/components/player-info/player-info";
 import { useRouter } from "next/router";
 import { ReactNode, createContext, useState } from "react";
@@ -11,6 +11,13 @@ interface ICommonStoreContext {
     startFresh: () => void;
     board: string[][];
     setBoard: (board: string[][]) => void;
+    currentPlayer: string;
+    setCurrentPlayer: (player: string) => void;
+    gameState: EGameStates;
+    setGameState: (gameState: EGameStates) => void;
+    currentGame: Game;
+    setCurrentGame: (game: Game) => void;
+    resetRound: () => void;
 }
 
 export const CommonStoreContext = createContext<ICommonStoreContext>({
@@ -21,6 +28,17 @@ export const CommonStoreContext = createContext<ICommonStoreContext>({
     startFresh: () => { },
     board: [],
     setBoard: () => { },
+    currentPlayer: '',
+    setCurrentPlayer: () => { },
+    gameState: EGameStates.PLAYING,
+    setGameState: () => { },
+    currentGame: {
+        result: '',
+        winnerId: 0,
+        round: 1,
+    },
+    setCurrentGame: () => { },
+    resetRound: () => { },
 });
 
 const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
@@ -31,6 +49,13 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
         ['', '', ''],
         ['', '', '']
     ]);
+    const [currentPlayer, setCurrentPlayer] = useState('X');
+    const [gameState, setGameState] = useState(EGameStates.PLAYING);
+    const [currentGame, setCurrentGame] = useState<Game>({
+        result: '',
+        winnerId: 0,
+        round: 1,
+    });
     const [players, setPlayers] = useState<TPlayerInfo[]>([
         {
             playerName: '',
@@ -58,6 +83,21 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             }]
         );
     }
+    const resetRound = () => {
+        setBoard([
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
+        setCurrentPlayer('X');
+        setGameState(EGameStates.PLAYING);
+        setCurrentGame({
+            result: '',
+            winnerId: 0,
+            round: currentGame.round + 1,
+        });
+    }
+
     const storeProps = {
         gameHistory,
         setGameHistory,
@@ -65,7 +105,14 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
         setPlayers,
         startFresh,
         board,
-        setBoard
+        setBoard,
+        currentPlayer,
+        setCurrentPlayer,
+        gameState,
+        setGameState,
+        currentGame,
+        setCurrentGame,
+        resetRound,
     };
 
     return (

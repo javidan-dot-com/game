@@ -1,0 +1,53 @@
+@import "../../styles/variables.scss";
+
+.player_info {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h3 {
+        font-size: 1.2rem;
+        font-weight: 400;
+
+            span {
+                font-weight: 600;
+                margin: 0 5px;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        height: 100%;
+
+        button {
+            width: 150px;
+            height: 60px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: $secondary-color;
+            color: #210E4A;
+            font-size: 0.7rem;
+            font-weight: 700;
+            align-items: center;
+            line-height: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            word-wrap: break-word;
+
+                &:hover {
+                    background-color: rgb(211, 66, 66);;
+                }
+            }
+    }
+}

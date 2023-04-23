@@ -14,14 +14,21 @@ export type Game = {
 }
 
 const GameBoard = () => {
-    const [gameState, setGameState] = useState(EGameStates.PLAYING);
-    const [currentPlayer, setCurrentPlayer] = useState('X');
-    const [currentGame, setCurrentGame] = useState<Game>({
-        result: '',
-        winnerId: 0,
-        round: 1,
-    });
-    const { gameHistory, setGameHistory, players, setPlayers, board, setBoard } = useContext(CommonStoreContext);
+    const {
+        gameHistory,
+        setGameHistory,
+        players,
+        setPlayers,
+        board,
+        setBoard,
+        currentPlayer,
+        setCurrentPlayer,
+        gameState,
+        setGameState,
+        currentGame,
+        setCurrentGame,
+        resetRound,
+    } = useContext(CommonStoreContext);
 
     useEffect(() => {
         if (gameState === EGameStates.GAME_OVER) {
@@ -120,19 +127,7 @@ const GameBoard = () => {
     }
 
     const handleRestartGame = () => {
-        setBoard([
-            ['', '', ''],
-            ['', '', ''],
-            ['', '', '']
-        ]);
-        setCurrentPlayer('X');
-        setGameState(EGameStates.PLAYING);
-        setCurrentGame({
-            result: '',
-            winnerId: 0,
-            round: currentGame.round + 1,
-        });
-
+        resetRound();
         const history = gameHistory;
 
         if (history.length > 0) {

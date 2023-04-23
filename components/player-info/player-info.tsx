@@ -1,5 +1,6 @@
 import { CommonStoreContext } from "@/stores/common.store";
 import { useContext } from "react";
+import styles from './player-info.module.scss';
 
 export type TPlayerInfo = {
     playerName: string,
@@ -12,14 +13,23 @@ interface PlayerInfoProps {
 }
 
 const PlayerInfo = ({ players }: PlayerInfoProps) => {
-    const { startFresh } = useContext(CommonStoreContext);
+    const { startFresh, resetRound } = useContext(CommonStoreContext);
+    const buttonsText = {
+        startFresh: 'start from beginning',
+        restart: 'restart current round',
+    }
 
     return (
-        <div>
-            <h3>Player 1: {players[0].playerName}</h3>
-            <h3>Player 2: {players[1].playerName}</h3>
+        <div className={styles.player_info}>
+            <div className={styles.player_info__details}>
+                <h3>Player 1: <span>{players[0].playerName}</span></h3>
+                <h3>Player 2: <span>{players[1].playerName}</span></h3>
+            </div>
 
-            <button onClick={startFresh}>Start from Fresh</button>
+            <div className={styles.player_info__buttons}>
+                <button onClick={startFresh}>{buttonsText.startFresh.toUpperCase()}</button>
+                <button onClick={resetRound}>{buttonsText.restart.toUpperCase()}</button>
+            </div>
         </div>
     )
 }
