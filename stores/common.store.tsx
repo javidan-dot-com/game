@@ -9,6 +9,8 @@ interface ICommonStoreContext {
     players: TPlayerInfo[];
     setPlayers: (players: TPlayerInfo[]) => void;
     startFresh: () => void;
+    board: string[][];
+    setBoard: (board: string[][]) => void;
 }
 
 export const CommonStoreContext = createContext<ICommonStoreContext>({
@@ -17,11 +19,18 @@ export const CommonStoreContext = createContext<ICommonStoreContext>({
     players: [],
     setPlayers: () => { },
     startFresh: () => { },
+    board: [],
+    setBoard: () => { },
 });
 
 const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
     const route = useRouter();
     const [gameHistory, setGameHistory] = useState<Game[]>([]);
+    const [board, setBoard] = useState<string[][]>([
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ]);
     const [players, setPlayers] = useState<TPlayerInfo[]>([
         {
             player: "Player 1",
@@ -49,9 +58,18 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             }]
         );
     }
+    const storeProps = {
+        gameHistory,
+        setGameHistory,
+        players,
+        setPlayers,
+        startFresh,
+        board,
+        setBoard
+    };
 
     return (
-        <CommonStoreContext.Provider value={{ gameHistory, setGameHistory, players, setPlayers, startFresh }}>
+        <CommonStoreContext.Provider value={storeProps}>
             {children}
         </CommonStoreContext.Provider>
     );
