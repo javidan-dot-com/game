@@ -3,7 +3,7 @@ import { CommonStoreContext } from '@/stores/common.store';
 import { useRouter } from "next/router";
 
 const Scores = () => {
-    const { gameHistory } = useContext(CommonStoreContext);
+    const { gameHistory, startFresh } = useContext(CommonStoreContext);
     const route = useRouter();
 
     return (
@@ -30,7 +30,7 @@ const Scores = () => {
             </table>
 
             <button onClick={() => route.back()}>Back to Game</button>
-            <button onClick={() => route.push('/')}>Start fresh</button>
+            <button onClick={() => startFresh()}>Start fresh</button>
         </div>
     );
 };
