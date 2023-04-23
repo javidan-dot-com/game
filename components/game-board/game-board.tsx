@@ -42,6 +42,22 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
                 ...history,
                 currentGame,
             ]);
+
+            const winner = currentGame.winner;
+            if (winner) {
+                const newPlayers = players.map(player => {
+                    if (player.player === winner) {
+                        return {
+                            ...player,
+                            score: player.score + 1,
+                        }
+                    }
+
+                    return player;
+                });
+
+                setPlayers(newPlayers);
+            }
         }
     }, [gameState]);
 
@@ -128,10 +144,12 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
                     {
                         ...players[0],
                         playerName: players[1].playerName,
+                        score: players[1].score,
                     },
                     {
                         ...players[1],
                         playerName: players[0].playerName,
+                        score: players[0].score,
                     }
                 ]);
             }
@@ -159,6 +177,8 @@ const GameBoard = ({ players, setPlayers }: GameBoardProps) => {
             <div>
                 <h3>Round: {currentGame.round}</h3>
                 <h3>Winner: {currentGame.result}</h3>
+                <h3>{`${players[0].playerName}'s score:`} {players[0].score}</h3>
+                <h3>{`${players[1].playerName}'s score:`} {players[1].score}</h3>
 
                 {gameState === EGameStates.GAME_OVER && (
                     <button
