@@ -1,14 +1,14 @@
-import { PlayerInfo } from '@/pages/game';
 import styles from './score-board.module.scss';
 import { useRouter } from 'next/router';
 import { CommonStoreContext } from '@/stores/common.store';
 import { useContext } from 'react';
+import { TPlayerInfo } from '../player-info/player-info';
 
 const ScoreBoard = () => {
     const route = useRouter();
     const { players } = useContext(CommonStoreContext);
 
-    const sortPlayers = (players: PlayerInfo[]) => {
+    const sortPlayers = (players: TPlayerInfo[]) => {
         return players.sort((a, b) => b.score - a.score);
     }
     const sortedList = sortPlayers(players);

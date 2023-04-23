@@ -1,7 +1,11 @@
-import { PlayerInfo } from "@/pages/game";
+export type TPlayerInfo = {
+    player: string,
+    playerName: string,
+    score: number
+}
 
 interface PlayerInfoProps {
-    players: PlayerInfo[];
+    players: TPlayerInfo[];
 }
 
 const PlayerInfo = ({ players }: PlayerInfoProps) => {

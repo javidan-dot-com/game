@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './game-board.module.scss';
-import { PlayerInfo } from '@/pages/game';
 import { CommonStoreContext } from '@/stores/common.store';
 
 export enum EGameStates {

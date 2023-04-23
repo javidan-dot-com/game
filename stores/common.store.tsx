@@ -1,13 +1,13 @@
 import { Game } from "@/components/game-board/game-board";
-import { PlayerInfo } from "@/pages/game";
+import { TPlayerInfo } from "@/components/player-info/player-info";
 import { useRouter } from "next/router";
 import { ReactNode, createContext, useState } from "react";
 
 interface ICommonStoreContext {
     gameHistory: Game[];
     setGameHistory: (gameHistory: Game[]) => void;
-    players: PlayerInfo[];
-    setPlayers: (players: PlayerInfo[]) => void;
+    players: TPlayerInfo[];
+    setPlayers: (players: TPlayerInfo[]) => void;
     startFresh: () => void;
 }
 
@@ -22,7 +22,7 @@ export const CommonStoreContext = createContext<ICommonStoreContext>({
 const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
     const route = useRouter();
     const [gameHistory, setGameHistory] = useState<Game[]>([]);
-    const [players, setPlayers] = useState<PlayerInfo[]>([
+    const [players, setPlayers] = useState<TPlayerInfo[]>([
         {
             player: "Player 1",
             playerName: '',

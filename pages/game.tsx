@@ -11,12 +11,6 @@ export type Players = {
     secondPlayer: string
 }
 
-export type PlayerInfo = {
-    player: string,
-    playerName: string,
-    score: number
-}
-
 const Game = () => {
     const route = useRouter();
     const { firstPlayer, secondPlayer } = route.query as Players;
