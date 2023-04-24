@@ -35,11 +35,17 @@ const ScoreBoard = () => {
             className={styles.score_board}
             data-test={"score-board"}
         >
-            <ul className={styles.score_board__list}>
+            <ul
+                className={styles.score_board__list}
+                data-test={"score-board-list"}
+            >
                 <h3>Score Board</h3>
                 {
                     sortedList.map((player, index) => (
-                        <li key={index}>
+                        <li
+                            key={index}
+                            data-test={"score-board-list-item"}
+                        >
                             <div>
                                 <p>{player.playerName}</p>
                             </div>
@@ -54,6 +60,7 @@ const ScoreBoard = () => {
                     !historyIsEmpty() && (
                         <button
                             className={styles.score_board__item__button}
+                            data-test={"see-pre-results-button"}
                             onClick={handleOnClick}
                         >
                             {scoreBoardText.button}
