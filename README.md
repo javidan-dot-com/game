@@ -6,6 +6,7 @@
 - Game Rules
 - Setup
 - Building Process
+- Conclusion
 
 ## Introduction
 
@@ -73,3 +74,7 @@ Step 5: Adding global state management
 ### References
 
 [https://joeallison.co.uk/monesedesignsystem.html](https://joeallison.co.uk/monesedesignsystem.html)
+
+## Conclusion
+
+I enjoyed building the game. Hope you enjoy while playing it. Enjoy!
