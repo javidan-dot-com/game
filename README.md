@@ -1,38 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tic-Tac-Toe Game Building
 
-## Getting Started
+## Contents
 
-First, run the development server:
+- Introduction
+- Game Rules
+- Setup
+- Building Process
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Introduction
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tic-Tac-Toe is a simple two-player game played on a 3x3 grid. The game is also known as Noughts and Crosses. The objective of the game is to place three marks in a row, either horizontally, vertically, or diagonally.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Game Rules
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- The game is played on a 3x3 grid.
+- One player is X, and the other player is O.
+- X always starts first.
+- Who wins the game is the first player to start the next round.
+- Players take turns placing their marks on an empty square.
+- The first player to get three marks in a row wins the game.
+- If all squares are filled and no player has won, the game is a draw.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Prerequisites
 
-## Learn More
+Node environment should be installed on your machine. If not, you can download it from [https://nodejs.org/en/download/](https://nodejs.org/en/download/). Better to use the latest version.
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository: `git clone https://github.com/wwJavid/game`
+2. Install dependencies
+`npm i`
+3. Run `npm run build` to build the project
+4. Run `npm run dev` to start the server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Building Process
 
-## Deploy on Vercel
+- Sketching UI
+- Defining guidelines
+- Future improvements
+- References
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Sketching UI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+After reading the requirements, I started to make sketches to visualize the layout and interface of the game. I sketched out possible designs for the game board, player markers, buttons for starting a new game, and displaying the game's status.
+
+### Defining guidelines
+
+I followed React’s 5 principles regarding app building alongside Airbnb and BEM style conventions. 
+
+Steps I followed:
+
+Step 1: Breaking the UI into a component hierarchy
+
+Step 2: Building a static version
+
+Step 3: Finding the minimal but complete representation of UI state
+
+Step 4: Identifying where states should live
+
+Step 5: Adding global state management
+
+### Future Improvements
+
+1. Static image format should be replaced with SVG for performance boost.
+2. Semantic HTML elements should be improved
+3. Form validation should be improved.
+4. Responsive design should be implemented.
+5. Accessibility should be met.
+
+### References
+
+[https://joeallison.co.uk/monesedesignsystem.html](https://joeallison.co.uk/monesedesignsystem.html)
