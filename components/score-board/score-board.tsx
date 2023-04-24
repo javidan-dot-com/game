@@ -32,7 +32,10 @@ const ScoreBoard = () => {
     }
 
     return (
-        <div className={styles.score_board}>
+        <div
+            className={styles.score_board}
+            data-test={"score-board"}
+        >
             <ul className={styles.score_board__list}>
 
                 <h3>Score Board</h3>

@@ -12,21 +12,33 @@ const GameInfo = () => {
     }
 
     return (
-        <div className={styles.game_info}>
+        <div
+            className={styles.game_info}
+            data-test="game-info"
+        >
             <div className={styles.game_info__item}>
-                <div className={styles.game_info__item__text}>
+                <div
+                    className={styles.game_info__item__text}
+                    data-test="game-info-first-player"
+                >
                     <h3>Player 1: </h3> <h3>{players[0].playerName}</h3>
                 </div>
-                <div className={styles.game_info__item__text}>
+                <div
+                    className={styles.game_info__item__text}
+                    data-test="game-info-second-player"
+                >
                     <h3>Player 2: </h3> <h3>{players[1].playerName}</h3>
                 </div>
             </div>
 
             <div className={styles.game_info__item}>
-                <div className={styles.game_info__item__text}>
+                <div
+                    className={styles.game_info__item__text}
+                    data-test="game-info-round"
+                >
                     <h3>Round: </h3> <h3>{currentGame.round}</h3>
-
                 </div>
+
                 <div
                     className={styles.game_info__item__text}
                     data-test="game-info-status"
@@ -46,12 +58,27 @@ const GameInfo = () => {
             </div>
 
             <div className={styles.game_info__buttons}>
-                <button onClick={startFresh}>{buttonsText.startFresh.toUpperCase()}</button>
+                <button
+                    data-test="restart-game-button"
+                    onClick={startFresh}
+                >
+                    {buttonsText.startFresh.toUpperCase()}
+                </button>
                 {
                     gameState === EGameStates.PLAYING ? (
-                        <button onClick={restartRound}>{buttonsText.restart.toUpperCase()}</button>
+                        <button
+                            onClick={restartRound}
+                            data-test="restart-round-button"
+                        >
+                            {buttonsText.restart.toUpperCase()}
+                        </button>
                     ) : (
-                        <button onClick={nextRound}>{buttonsText.nextRound.toUpperCase()}</button>
+                        <button
+                            data-test="next-round-button"
+                            onClick={nextRound}
+                        >
+                            {buttonsText.nextRound.toUpperCase()}
+                        </button>
                     )
                 }
             </div>
