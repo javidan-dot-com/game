@@ -2,13 +2,13 @@ import styles from './score-board.module.scss';
 import { useRouter } from 'next/router';
 import { CommonStoreContext } from '@/stores/common.store';
 import { useContext } from 'react';
-import { TPlayerInfo } from '../game-info/game-info';
+import { TPlayer } from '@/lib/types';
 
 const ScoreBoard = () => {
     const route = useRouter();
     const { players, gameHistory } = useContext(CommonStoreContext);
 
-    const sortPlayers = (players: TPlayerInfo[]) => {
+    const sortPlayers = (players: TPlayer[]) => {
         const clonedPlayers = players.slice();
         return clonedPlayers.sort((a, b) => b.score - a.score);
     }

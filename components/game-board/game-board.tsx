@@ -1,17 +1,7 @@
 import { useContext, useEffect } from 'react';
 import styles from './game-board.module.scss';
 import { CommonStoreContext } from '@/stores/common.store';
-
-export enum EGameStates {
-    PLAYING = 'PLAYING',
-    GAME_OVER = 'GAME_OVER'
-}
-
-export type Game = {
-    result: string;
-    winnerId: number;
-    round: number;
-}
+import { EGameResults, EGameStates } from '@/lib/types';
 
 const GameBoard = () => {
     const {
@@ -92,7 +82,7 @@ const GameBoard = () => {
         if (checkDraw(newBoard)) {
             setCurrentGame({
                 ...currentGame,
-                result: 'Draw',
+                result: EGameResults.DRAW,
                 winnerId: 0,
             });
             setGameState(EGameStates.GAME_OVER);

@@ -1,7 +1,7 @@
 import { CommonStoreContext } from "@/stores/common.store";
 import { useContext } from "react";
 import styles from './game-info.module.scss';
-import { EGameStates } from "../game-board/game-board";
+import { EGameStates } from "@/lib/types";
 
 const GameInfo = () => {
     const { startFresh, nextRound, restartRound, players, currentGame, currentPlayer, gameState } = useContext(CommonStoreContext);

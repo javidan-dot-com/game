@@ -1,18 +1,12 @@
-import { EGameStates, Game } from "@/components/game-board/game-board";
+import { EGameStates, TGame, TPlayer } from "@/lib/types";
 import { useRouter } from "next/router";
 import { ReactNode, createContext, useState } from "react";
 
-export type TPlayerInfo = {
-    playerName: string,
-    playerId: number,
-    score: number,
-}
-
 interface ICommonStoreContext {
-    gameHistory: Game[];
-    setGameHistory: (gameHistory: Game[]) => void;
-    players: TPlayerInfo[];
-    setPlayers: (players: TPlayerInfo[]) => void;
+    gameHistory: TGame[];
+    setGameHistory: (gameHistory: TGame[]) => void;
+    players: TPlayer[];
+    setPlayers: (players: TPlayer[]) => void;
     startFresh: () => void;
     board: string[][];
     setBoard: (board: string[][]) => void;
@@ -20,8 +14,8 @@ interface ICommonStoreContext {
     setCurrentPlayer: (player: string) => void;
     gameState: EGameStates;
     setGameState: (gameState: EGameStates) => void;
-    currentGame: Game;
-    setCurrentGame: (game: Game) => void;
+    currentGame: TGame;
+    setCurrentGame: (game: TGame) => void;
     nextRound: () => void;
     restartRound: () => void;
 }
@@ -50,7 +44,7 @@ export const CommonStoreContext = createContext<ICommonStoreContext>({
 
 const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
     const route = useRouter();
-    const [gameHistory, setGameHistory] = useState<Game[]>([]);
+    const [gameHistory, setGameHistory] = useState<TGame[]>([]);
     const [board, setBoard] = useState<string[][]>([
         ['', '', ''],
         ['', '', ''],
@@ -58,12 +52,12 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
     ]);
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [gameState, setGameState] = useState(EGameStates.PLAYING);
-    const [currentGame, setCurrentGame] = useState<Game>({
+    const [currentGame, setCurrentGame] = useState<TGame>({
         result: '',
         winnerId: 0,
         round: 1,
     });
-    const [players, setPlayers] = useState<TPlayerInfo[]>([
+    const [players, setPlayers] = useState<TPlayer[]>([
         {
             playerName: '',
             playerId: 1,

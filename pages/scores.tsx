@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { CommonStoreContext } from '@/stores/common.store';
 import { useRouter } from "next/router";
 import styles from '../styles/Scores.module.scss';
+import { EGameResults } from "@/lib/types";
 
 const Scores = () => {
     const { gameHistory, startFresh, players } = useContext(CommonStoreContext);
@@ -29,7 +30,7 @@ const Scores = () => {
                         {gameHistory.map((game, index) => (
                             <tr key={index}>
                                 <td>{game.round}</td>
-                                <td>{game.result === "Draw" ? game.result : `${game.result} won`}</td>
+                                <td>{game.result === EGameResults.DRAW ? game.result : `${game.result} won`}</td>
                             </tr>
                         ))}
                     </tbody>
