@@ -77,6 +77,7 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             winnerId: 0,
             round: 1,
         });
+        setCurrentPlayer('X');
         setBoard([
             ['', '', ''],
             ['', '', ''],
