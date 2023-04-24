@@ -4,10 +4,11 @@ import styles from './game-info.module.scss';
 import { EGameStates } from "../game-board/game-board";
 
 const GameInfo = () => {
-    const { startFresh, resetRound, players, currentGame, currentPlayer, gameState } = useContext(CommonStoreContext);
+    const { startFresh, nextRound, restartRound, players, currentGame, currentPlayer, gameState } = useContext(CommonStoreContext);
     const buttonsText = {
         startFresh: 'start from beginning',
         restart: 'restart current round',
+        nextRound: 'next round',
     }
 
     return (
@@ -43,7 +44,13 @@ const GameInfo = () => {
 
             <div className={styles.game_info__buttons}>
                 <button onClick={startFresh}>{buttonsText.startFresh.toUpperCase()}</button>
-                <button onClick={resetRound}>{buttonsText.restart.toUpperCase()}</button>
+                {
+                    gameState === EGameStates.PLAYING ? (
+                        <button onClick={restartRound}>{buttonsText.restart.toUpperCase()}</button>
+                    ) : (
+                        <button onClick={nextRound}>{buttonsText.nextRound.toUpperCase()}</button>
+                    )
+                }
             </div>
         </div>
     )

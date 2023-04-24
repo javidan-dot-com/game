@@ -6,7 +6,7 @@ import { TPlayerInfo } from '../game-info/game-info';
 
 const ScoreBoard = () => {
     const route = useRouter();
-    const { players } = useContext(CommonStoreContext);
+    const { players, gameHistory } = useContext(CommonStoreContext);
 
     const sortPlayers = (players: TPlayerInfo[]) => {
         const clonedPlayers = players.slice();
@@ -14,11 +14,28 @@ const ScoreBoard = () => {
     }
     const sortedList = sortPlayers(players);
 
+    const scoreBoardText = {
+        button: 'See previous results',
+        emptyHistory: 'No previous results',
+    }
+    const historyIsEmpty = () => {
+        if (gameHistory.length === 0) {
+            return true;
+        }
+        return false;
+    }
+    const handleOnClick = () => {
+        if (historyIsEmpty()) {
+            return;
+        }
+        route.push('/scores');
+    }
+
     return (
         <div className={styles.score_board}>
-            <h3>Score Board</h3>
+            <ul className={styles.score_board__list}>
 
-            <ul className={styles.score_board__item}>
+                <h3>Score Board</h3>
                 {
                     sortedList.map((player, index) => (
                         <li key={index}>
@@ -32,12 +49,11 @@ const ScoreBoard = () => {
                         </li>
                     ))
                 }
-
                 <button
                     className={styles.score_board__item__button}
-                    onClick={() => route.push('/scores')}
+                    onClick={handleOnClick}
                 >
-                    See previous results
+                    {historyIsEmpty() ? scoreBoardText.emptyHistory : scoreBoardText.button}
                 </button>
             </ul>
         </div>

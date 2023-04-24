@@ -31,10 +31,21 @@ const StartingForm = () => {
         });
     }
 
-    const validateForm = () => {
-        return firstPlayer.length > 0 && secondPlayer.length > 0;
+    const errorMessageTexts = {
+        empty: 'Please enter a valid name.',
+        same: 'Please enter different names.'
+    }
 
-        // TODO: Improve validation
+    const validateForm = () => {
+        if (firstPlayer.trim() === '' || secondPlayer.trim() === '') {
+            alert(errorMessageTexts.empty);
+            return false;
+        } else if (firstPlayer === secondPlayer) {
+            alert(errorMessageTexts.same)
+            return false;
+        } else {
+            return true;
+        }
     }
 
     return (
@@ -51,6 +62,7 @@ const StartingForm = () => {
                     value={firstPlayer}
                     onChange={handleFirstPlayerNameChange}
                     className={styles.first_name}
+                    required
                 />
             </div>
 
@@ -62,6 +74,7 @@ const StartingForm = () => {
                     name="second-player-name"
                     value={secondPlayer}
                     onChange={handleSecondPlayerNameChange}
+                    required
                 />
             </div>
 

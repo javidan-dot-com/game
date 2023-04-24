@@ -27,7 +27,6 @@ const GameBoard = () => {
         setGameState,
         currentGame,
         setCurrentGame,
-        resetRound,
     } = useContext(CommonStoreContext);
 
     useEffect(() => {
@@ -126,26 +125,6 @@ const GameBoard = () => {
         return board.every(row => row.every(cell => cell !== ''));
     }
 
-    const handleRestartGame = () => {
-        resetRound();
-        const history = gameHistory;
-
-        if (history.length > 0) {
-            const previousGame = history[history.length - 1];
-            console.log(previousGame, players[0].score, players[1].score);
-            if (previousGame.winnerId === players[1].playerId) {
-                setPlayers([
-                    {
-                        ...players[1],
-                    },
-                    {
-                        ...players[0],
-                    }
-                ]);
-            }
-        }
-    }
-
     return (
         <div className={styles.game_board}>
             <div className={styles.board}>
@@ -162,18 +141,6 @@ const GameBoard = () => {
                         ))}
                     </div>
                 ))}
-            </div>
-
-            <div>
-                {
-                    gameState === EGameStates.GAME_OVER && (
-                        <button
-                            onClick={handleRestartGame}
-                        >
-                            Restart Game
-                        </button>
-                    )
-                }
             </div>
         </div>
     )

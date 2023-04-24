@@ -22,7 +22,8 @@ interface ICommonStoreContext {
     setGameState: (gameState: EGameStates) => void;
     currentGame: Game;
     setCurrentGame: (game: Game) => void;
-    resetRound: () => void;
+    nextRound: () => void;
+    restartRound: () => void;
 }
 
 export const CommonStoreContext = createContext<ICommonStoreContext>({
@@ -43,7 +44,8 @@ export const CommonStoreContext = createContext<ICommonStoreContext>({
         round: 1,
     },
     setCurrentGame: () => { },
-    resetRound: () => { },
+    nextRound: () => { },
+    restartRound: () => { },
 });
 
 const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
@@ -73,8 +75,19 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             score: 0,
         }]);
     const startFresh = () => {
-        route.push('/');
+        route.replace('/');
         setGameHistory([]);
+        setGameState(EGameStates.PLAYING);
+        setCurrentGame({
+            result: '',
+            winnerId: 0,
+            round: 1,
+        });
+        setBoard([
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
         setPlayers([
             {
                 playerName: '',
@@ -88,7 +101,22 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             }]
         );
     }
-    const resetRound = () => {
+    const restartRound = () => {
+        setBoard([
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
+        setCurrentPlayer('X');
+        setGameState(EGameStates.PLAYING);
+        setCurrentGame({
+            result: '',
+            winnerId: 0,
+            round: currentGame.round,
+        });
+        setGameHistory(gameHistory.slice());
+    }
+    const nextRound = () => {
         setBoard([
             ['', '', ''],
             ['', '', ''],
@@ -101,6 +129,22 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
             winnerId: 0,
             round: currentGame.round + 1,
         });
+        const history = gameHistory;
+
+        if (history.length > 0) {
+            const previousGame = history[history.length - 1];
+            console.log(previousGame, players[0].score, players[1].score);
+            if (previousGame.winnerId === players[1].playerId) {
+                setPlayers([
+                    {
+                        ...players[1],
+                    },
+                    {
+                        ...players[0],
+                    }
+                ]);
+            }
+        }
     }
 
     const storeProps = {
@@ -117,7 +161,8 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
         setGameState,
         currentGame,
         setCurrentGame,
-        resetRound,
+        nextRound,
+        restartRound,
     };
 
     return (
