@@ -128,7 +128,6 @@ const CommonStoreProvider = ({ children }: { children: ReactNode }) => {
 
         if (history.length > 0) {
             const previousGame = history[history.length - 1];
-            console.log(previousGame, players[0].score, players[1].score);
             if (previousGame.winnerId === players[1].playerId) {
                 setPlayers([
                     {
