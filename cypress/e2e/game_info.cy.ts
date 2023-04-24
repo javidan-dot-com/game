@@ -56,4 +56,17 @@ describe('Game Info', () => {
         cy.get('[data-test="restart-game-button"]').click();
         cy.url().should('include', '/');
     });
+
+    it('if second player wins the game should become the first player in next round', () => {
+        cy.get('[data-test="cell-0-0"]').as('btn').click();
+        cy.get('[data-test="cell-0-1"]').as('btn').click();
+        cy.get('[data-test="cell-1-0"]').as('btn').click();
+        cy.get('[data-test="cell-1-1"]').as('btn').click();
+        cy.get('[data-test="cell-2-2"]').as('btn').click();
+        cy.get('[data-test="cell-2-1"]').as('btn').click();
+        cy.get('[data-test="game-info-status"]').should('contain', 'Jane');
+        cy.get('[data-test="next-round-button"]').should('exist');
+        cy.get('[data-test="next-round-button"]').click();
+        cy.get('[data-test="game-info-first-player"]').should('contain', 'Jane');
+    });
 });

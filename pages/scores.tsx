@@ -19,7 +19,9 @@ const Scores = () => {
     return (
         <main className={styles.main}>
             <div className={styles.container}>
-                <table>
+                <table
+                    data-test="scores-table"
+                >
                     <thead>
                         <tr>
                             <th>Round</th>
@@ -36,8 +38,16 @@ const Scores = () => {
                     </tbody>
                 </table>
 
-                <button onClick={() => route.back()}>Back to Game</button>
-                <button onClick={() => startFresh()}>Start fresh</button>
+                <button
+                    onClick={() => route.back()}
+                    data-test="back-to-game-button"
+                >Back to Game</button>
+                <button
+                    onClick={() => startFresh()}
+                    data-test="restart-game-button"
+                >
+                    Start fresh
+                </button>
             </div>
         </main>
     );
