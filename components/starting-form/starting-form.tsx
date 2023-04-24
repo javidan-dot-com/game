@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from './starting-form.module.scss';
+import { CommonStoreContext } from "@/stores/common.store";
 
 const StartingForm = () => {
+    const { players, setPlayers } = useContext(CommonStoreContext);
     const [firstPlayer, setFirstPlayer] = useState<string>('');
     const [secondPlayer, setSecondPlayer] = useState<string>('');
     const route = useRouter();
@@ -24,10 +26,6 @@ const StartingForm = () => {
 
         route.push({
             pathname: '/game',
-            query: {
-                firstPlayer,
-                secondPlayer
-            }
         });
     }
 
@@ -47,6 +45,19 @@ const StartingForm = () => {
             return true;
         }
     }
+
+    useEffect(() => {
+        setPlayers([
+            {
+                ...players[0],
+                playerName: firstPlayer,
+            },
+            {
+                ...players[1],
+                playerName: secondPlayer,
+            }
+        ]);
+    }, [firstPlayer, secondPlayer]);
 
     return (
         <form

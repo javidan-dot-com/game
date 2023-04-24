@@ -1,11 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CommonStoreContext } from '@/stores/common.store';
 import { useRouter } from "next/router";
 import styles from '../styles/Scores.module.scss';
 
 const Scores = () => {
-    const { gameHistory, startFresh } = useContext(CommonStoreContext);
+    const { gameHistory, startFresh, players } = useContext(CommonStoreContext);
     const route = useRouter();
+
+    useEffect(() => {
+        if (players[0].playerName === '' || players[1].playerName === '') {
+            route.replace({
+                pathname: '/',
+            });
+        }
+    }, []);
 
     return (
         <main className={styles.main}>

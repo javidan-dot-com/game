@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
 import styles from '../styles/Game.module.scss';
 import GameBoard from "@/components/game-board/game-board";
-import { useContext, useEffect } from "react";
 import ScoreBoard from "@/components/score-board/score-board";
-import { CommonStoreContext } from "@/stores/common.store";
 import PlayerInfo from "@/components/game-info/game-info";
+import { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { CommonStoreContext } from '@/stores/common.store';
 
 export type Players = {
     firstPlayer: string,
@@ -13,21 +13,15 @@ export type Players = {
 
 const Game = () => {
     const route = useRouter();
-    const { firstPlayer, secondPlayer } = route.query as Players;
-    const { players, setPlayers } = useContext(CommonStoreContext);
+    const { players } = useContext(CommonStoreContext);
 
     useEffect(() => {
-        setPlayers([
-            {
-                ...players[0],
-                playerName: firstPlayer,
-            },
-            {
-                ...players[1],
-                playerName: secondPlayer,
-            }
-        ]);
-    }, [firstPlayer, secondPlayer]);
+        if (players[0].playerName === '' || players[1].playerName === '') {
+            route.replace({
+                pathname: '/',
+            });
+        }
+    }, []);
 
     return (
         <main className={styles.main}>
