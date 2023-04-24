@@ -1,7 +1,7 @@
 import styles from '../styles/Game.module.scss';
 import GameBoard from "@/components/game-board/game-board";
 import ScoreBoard from "@/components/score-board/score-board";
-import PlayerInfo from "@/components/game-info/game-info";
+import GameInfo from "@/components/game-info/game-info";
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { CommonStoreContext } from '@/stores/common.store';
@@ -25,7 +25,7 @@ const Game = () => {
 
     return (
         <main className={styles.main}>
-            <PlayerInfo />
+            <GameInfo />
 
             <GameBoard />
 

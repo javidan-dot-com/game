@@ -116,15 +116,16 @@ const GameBoard = () => {
     }
 
     return (
-        <div className={styles.game_board}>
-            <div className={styles.board}>
+        <div className={styles.game_board} data-test="game-board">
+            <div className={styles.board} data-test="board">
                 {board.map((row, rowIndex) => (
-                    <div key={rowIndex} className={styles.row}>
+                    <div key={rowIndex} className={styles.row} data-test="row">
                         {row.map((cell, columnIndex) => (
                             <div
                                 key={columnIndex}
                                 className={styles.cell}
                                 onClick={() => gameState === EGameStates.PLAYING && handleCellClick(rowIndex, columnIndex)}
+                                data-test={`cell-${rowIndex}-${columnIndex}`}
                             >
                                 {cell}
                             </div>

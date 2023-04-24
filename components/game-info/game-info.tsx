@@ -27,7 +27,10 @@ const GameInfo = () => {
                     <h3>Round: </h3> <h3>{currentGame.round}</h3>
 
                 </div>
-                <div className={styles.game_info__item__text}>
+                <div
+                    className={styles.game_info__item__text}
+                    data-test="game-info-status"
+                >
                     {
                         gameState === EGameStates.PLAYING ? (
                             <>
