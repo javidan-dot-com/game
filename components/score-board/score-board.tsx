@@ -16,7 +16,6 @@ const ScoreBoard = () => {
 
     const scoreBoardText = {
         button: 'See previous results',
-        emptyHistory: 'No previous results',
     }
     const historyIsEmpty = () => {
         if (gameHistory.length === 0) {
@@ -37,7 +36,6 @@ const ScoreBoard = () => {
             data-test={"score-board"}
         >
             <ul className={styles.score_board__list}>
-
                 <h3>Score Board</h3>
                 {
                     sortedList.map((player, index) => (
@@ -52,12 +50,16 @@ const ScoreBoard = () => {
                         </li>
                     ))
                 }
-                <button
-                    className={styles.score_board__item__button}
-                    onClick={handleOnClick}
-                >
-                    {historyIsEmpty() ? scoreBoardText.emptyHistory : scoreBoardText.button}
-                </button>
+                {
+                    !historyIsEmpty() && (
+                        <button
+                            className={styles.score_board__item__button}
+                            onClick={handleOnClick}
+                        >
+                            {scoreBoardText.button}
+                        </button>
+                    )
+                }
             </ul>
         </div>
     )
