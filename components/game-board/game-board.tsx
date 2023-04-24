@@ -22,26 +22,27 @@ const GameBoard = () => {
     useEffect(() => {
         if (gameState === EGameStates.GAME_OVER) {
             const history = gameHistory;
+            const isCurrentGameChanged = currentGame.round !== history[history.length - 1]?.round;
 
-            setGameHistory([
-                ...history,
-                currentGame,
-            ]);
+            if (isCurrentGameChanged) {
+                setGameHistory([
+                    ...history,
+                    currentGame,
+                ]);
 
-            const winner = players.find(player => player.playerId === currentGame.winnerId);
-            if (winner) {
-                const newPlayers = players.map(player => {
-                    if (player.playerId === winner.playerId) {
-                        return {
-                            ...player,
-                            score: player.score + 1,
+                if (currentGame.result !== EGameResults.DRAW) {
+                    const updatedPlayers = players.map(player => {
+                        if (player.playerId === currentGame.winnerId) {
+                            return {
+                                ...player,
+                                score: player.score + 1,
+                            }
                         }
-                    }
-                    return player;
-                });
-
-                setPlayers(newPlayers);
-            }
+                        return player;
+                    });
+                    setPlayers(updatedPlayers);
+                }
+            };
         }
     }, [gameState]);
 
