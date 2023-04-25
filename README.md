@@ -40,12 +40,17 @@ Node environment should be installed on your machine. If not, you can download i
 
 - Sketching UI
 - Defining guidelines
+- Branding
 - Future improvements
 - References
 
 ### Sketching UI
 
 After reading the requirements, I started to make sketches to visualize the layout and interface of the game. I sketched out possible designs for the game board, player markers, buttons for starting a new game, and displaying the game's status.
+
+### Branding
+
+In order to create branding for the game, I based upon design system of Monese. I got logo from Monese Media Pack and used it according to brand guidelines. More comprehensive information is acquired from Joe Alisson's design sytem work for Monese.
 
 ### Defining guidelines
 
