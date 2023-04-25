@@ -75,7 +75,7 @@ Step 5: Adding global state management
 3. Form validation should be improved.
 4. Responsive design should be implemented.
 5. Accessibility should be met.
-6. Following Comp/Pres pattern for larger components.
+6. Following Container/Presentational pattern for larger components.
 7. Storing game data in indexedDB web storage.
 
 ### References
